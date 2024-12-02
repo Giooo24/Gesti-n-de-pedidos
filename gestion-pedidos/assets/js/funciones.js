@@ -9,29 +9,32 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         "order": [
             [0, "desc"]
-        ]
+        ],
+        "paging": true,
+        "pagingType": "simple_numbers",
+        "searching": true
     });
 
     $(".confirmar").submit(function (e) {
         e.preventDefault();
         Swal.fire({
-            title: 'Esta seguro de eliminar?',
+            title: '¿Está seguro de eliminar?',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'SI, Eliminar!'
+            confirmButtonColor: '#FF6347', // Tomato color for confirm button
+            cancelButtonColor: '#28a745', // Green color for cancel button
+            confirmButtonText: 'Sí, Eliminar!'
         }).then((result) => {
             if (result.isConfirmed) {
                 this.submit();
             }
-        })
-    })
+        });
+    });
 
     $('.addDetalle').click(function () {
         let id_producto = $(this).data('id');
         registrarDetalle(id_producto);
-    })
+    });
 
     $('#realizar_pedido').click(function (e) {
         e.preventDefault();
@@ -54,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Pedido Solicitado',
+                        title: 'Pedido solicitado con éxito',
                         showConfirmButton: false,
                         timer: 2000
                     })
@@ -65,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'error',
-                        title: 'Error al generar',
+                        title: 'Error al generar el pedido',
                         showConfirmButton: false,
                         timer: 2000
                     })
@@ -106,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'error',
-                        title: 'Error al finalizar',
+                        title: 'Error al finalizar el pedido',
                         showConfirmButton: false,
                         timer: 2000
                     })
@@ -116,9 +119,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert(error);
             }
         });
-
     })
-})
+});
 
 function listar() {
     let html = '';
@@ -131,21 +133,21 @@ function listar() {
         },
         success: function (response) {
             response.forEach(row => {
-                html += `<div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="col-12">
-                            <img src="${ row.imagen }" class="product-image" alt="Product Image">
-                        </div>
-                        <p class="my-3">${row.nombre}</p>
-                        <h2 class="mb-0">${row.precio}</h2>
-                        <div class="mt-1">
-                            <input type="number" class="form-control addCantidad mb-2" data-id="${row.id}" value="${row.cantidad}">
-                            <button class="btn btn-danger eliminarPlato" type="button" data-id="${row.id}">Eliminar</button>
+                html += `<div class="col-md-4 mb-3">
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+                            <div class="col-12 text-center">
+                                <img src="${row.imagen}" class="product-image rounded-circle border" alt="Product Image" style="max-width: 100px;">
+                            </div>
+                            <p class="my-3 text-muted">${row.nombre}</p>
+                            <h2 class="mb-0 text-success">${row.precio}</h2>
+                            <div class="mt-3">
+                                <input type="number" class="form-control addCantidad mb-2" data-id="${row.id}" value="${row.cantidad}" style="border-radius: 10px;">
+                                <button class="btn btn-danger eliminarPlato" type="button" data-id="${row.id}" style="border-radius: 10px;">Eliminar</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>`;
+                </div>`;
             });
             document.querySelector("#detalle_pedido").innerHTML = html;
             $('.eliminarPlato').click(function () {
@@ -177,7 +179,7 @@ function registrarDetalle(id_pro) {
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: 'Producto agregado',
+                title: 'Producto agregado al carrito',
                 showConfirmButton: false,
                 timer: 2000
             })
@@ -186,7 +188,7 @@ function registrarDetalle(id_pro) {
 }
 
 function eliminarPlato(id) {
-    let detalle = 'Eliminar'
+    let detalle = 'Eliminar';
     $.ajax({
         url: "ajax.php",
         data: {
@@ -194,12 +196,11 @@ function eliminarPlato(id) {
             delete_detalle: detalle
         },
         success: function (response) {
-
             if (response == 'ok') {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Producto Eliminado',
+                    title: 'Producto eliminado con éxito',
                     showConfirmButton: false,
                     timer: 2000
                 })
@@ -218,7 +219,7 @@ function eliminarPlato(id) {
 }
 
 function cantidadPlato(cantidad, id) {
-    let detalle = 'cantidad'
+    let detalle = 'cantidad';
     $.ajax({
         url: "ajax.php",
         data: {
@@ -227,13 +228,12 @@ function cantidadPlato(cantidad, id) {
             detalle_cantidad: detalle
         },
         success: function (response) {
-
             if (response != 'ok') {
                 listar();
                 Swal.fire({
                     position: 'top-end',
                     icon: 'error',
-                    title: 'Error al agregar cantidad',
+                    title: 'Error al agregar la cantidad',
                     showConfirmButton: false,
                     timer: 2000
                 })
@@ -250,7 +250,7 @@ function btnCambiar(e) {
         Swal.fire({
             position: 'top-end',
             icon: 'error',
-            title: 'Los campos estan vacios',
+            title: 'Los campos están vacíos',
             showConfirmButton: false,
             timer: 2000
         })
@@ -269,7 +269,7 @@ function btnCambiar(e) {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Contraseña modificado',
+                        title: 'Contraseña modificada con éxito',
                         showConfirmButton: false,
                         timer: 2000
                     })
@@ -279,7 +279,7 @@ function btnCambiar(e) {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'error',
-                        title: 'La contraseña actual incorrecta',
+                        title: 'Contraseña actual incorrecta',
                         showConfirmButton: false,
                         timer: 2000
                     })
@@ -313,39 +313,11 @@ function editarUsuario(id) {
             $('#rol').val(datos.rol);
             $('#correo').val(datos.correo);
             $('#id').val(datos.id);
-            $('#btnAccion').val('Modificar');
-        },
-        error: function (error) {
-            console.log(error);
-
+            $('#btnAccion').val('actualizar');
         }
     });
 }
 
-function editarPlato(id) {
-    const action = "editarProducto";
-    $.ajax({
-        url: 'ajax.php',
-        type: 'GET',
-        async: true,
-        data: {
-            editarProducto: action,
-            id: id
-        },
-        success: function (response) {
-            const datos = JSON.parse(response);
-            $('#plato').val(datos.nombre);
-            $('#precio').val(datos.precio);
-            $('#foto_actual').val(datos.foto_actual);
-            $('#id').val(datos.id);
-            $('#btnAccion').val('Modificar');
-        },
-        error: function (error) {
-            console.log(error);
-
-        }
-    });
-}
 
 function limpiar() {
     $('#formulario')[0].reset();

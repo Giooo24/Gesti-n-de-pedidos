@@ -41,7 +41,7 @@ CREATE TABLE `config` (
 --
 
 INSERT INTO `config` (`id`, `nombre`, `telefono`, `email`, `direccion`, `mensaje`) VALUES
-(1, 'Restaurante RestoBar', '957847894', 'restobar@gmail.com', 'Lima - Perú', 'Gracias por la compra');
+(1, 'Fastfood Chunga', '3010598672', 'chunga@gmail.com', 'Cabecera', 'Gracias por la compra');
 
 -- --------------------------------------------------------
 
@@ -62,13 +62,13 @@ CREATE TABLE `detalle_pedidos` (
 --
 
 INSERT INTO `detalle_pedidos` (`id`, `nombre`, `precio`, `cantidad`, `id_pedido`) VALUES
-(1, 'AJI DE GALLINA', '10.00', 1, 1),
-(2, 'CEBICHE', '25.00', 1, 1),
-(3, 'ARROZ CON POLLO', '8.00', 3, 1),
-(4, 'CEBICHE', '25.00', 1, 2),
-(5, 'ARROZ CON POLLO', '8.00', 1, 2),
-(6, 'AJI DE GALLINA', '10.00', 1, 3),
-(7, 'CEBICHE', '25.00', 1, 4);
+(1, 'HAMBURGUESA CLASICA', '15000', 1, 1),
+(2, 'PORCION DE PAPAS', '6000', 1, 1),
+(3, 'HAMBURGUESA MIXTA', '18000', 3, 1),
+(4, 'PORCION DE PAPAS', '6000', 1, 2),
+(5, 'HAMBURGUESA MIXTA', '18000', 1, 2),
+(6, 'HAMBURGUESA CLASICA', '15000', 1, 3),
+(7, 'HAMBURGUESA MIXTA', '18000', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -92,10 +92,10 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`id`, `id_sala`, `num_mesa`, `fecha`, `total`, `observacion`, `estado`, `id_usuario`) VALUES
-(1, 1, 1, '2023-05-25 20:03:27', '59.00', '', 'FINALIZADO', 1),
-(2, 3, 3, '2023-05-25 20:03:43', '33.00', '', 'FINALIZADO', 1),
-(3, 3, 5, '2023-05-25 20:04:17', '10.00', '', 'FINALIZADO', 1),
-(4, 2, 10, '2023-05-25 20:03:11', '25.00', '', 'PENDIENTE', 1);
+(1, 1, 1, '2024-11-30 20:03:27', '39000', '', 'FINALIZADO', 1),
+(2, 3, 3, '2024-11-30 20:03:43', '24000', '', 'FINALIZADO', 1),
+(3, 3, 5, '2024-11-30 20:04:17', '15000', '', 'FINALIZADO', 1),
+(4, 2, 10, '2024-11-30 20:03:11', '18000', '', 'PENDIENTE', 1);
 
 -- --------------------------------------------------------
 
@@ -117,9 +117,9 @@ CREATE TABLE `platos` (
 --
 
 INSERT INTO `platos` (`id`, `nombre`, `precio`, `imagen`, `fecha`, `estado`) VALUES
-(1, 'AJI DE GALLINA', '10.00', '', NULL, 1),
-(2, 'CEBICHE', '25.00', '', NULL, 1),
-(3, 'ARROZ CON POLLO', '8.00', '', NULL, 1);
+(1, 'HAMBURGUESA CLASICA', '15000', '', NULL, 1),
+(2, 'HAMBURGUESA MIXTA', '18000', '', NULL, 1),
+(3, 'PORCION DE PAPAS', '6000', '', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -177,7 +177,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `pass`, `rol`, `estado`) VALUES
-(1, 'SISTEMAS FREE', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 1, 1);
+(1, 'ADMIN', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 1, 1);
 
 --
 -- Índices para tablas volcadas
