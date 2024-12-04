@@ -4,12 +4,12 @@ if (empty($_SESSION['active'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sistema de restaurante</title>
+    <title>Restaurante Gestión</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -17,25 +17,24 @@ if (empty($_SESSION['active'])) {
     <link rel="stylesheet" href="../assets/plugins/fontawesome-free/css/all.min.css">
     <!-- IonIcons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Theme style -->
+    <!-- Estilo del Tema -->
     <link rel="stylesheet" href="../assets/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="../assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-        <!-- Navbar -->
+        <!-- Barra de Navegación -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
+            <!-- Enlaces de la izquierda -->
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
             </ul>
 
-            <!-- Right navbar links -->
+            <!-- Enlaces de la derecha -->
             <ul class="navbar-nav ml-auto">
-
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -45,17 +44,17 @@ if (empty($_SESSION['active'])) {
         </nav>
         <!-- /.navbar -->
 
-        <!-- Main Sidebar Container -->
+        <!-- Contenedor de la Barra Lateral -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <!-- Brand Logo -->
+            <!-- Logo de la Marca -->
             <a href="dashboard.php" class="brand-link">
-                <img src="../assets/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">RestBAR</span>
+                <img src="../assets/img/logo.png" alt="Logo Restaurante" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">Restaurante Gestión</span>
             </a>
 
-            <!-- Sidebar -->
+            <!-- Barra Lateral -->
             <div class="sidebar">
-                <!-- Sidebar user panel (optional) -->
+                <!-- Panel del Usuario -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
                         <i class="fas fa-user-circle fa-2x text-info"></i>
@@ -65,19 +64,20 @@ if (empty($_SESSION['active'])) {
                     </div>
                 </div>
 
-                <!-- Sidebar Menu -->
+                <!-- Menú de la Barra Lateral -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+                        <!-- Dashboard -->
                         <li class="nav-item">
                             <a href="dashboard.php" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Dashboard
+                                    Panel de Control
                                 </p>
                             </a>
                         </li>
+
+                        <!-- Ventas -->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-pizza-slice"></i>
@@ -98,14 +98,14 @@ if (empty($_SESSION['active'])) {
                                     echo '<li class="nav-item">
                                         <a href="lista_ventas.php" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Historial ventas</p>
+                                            <p>Historial de Ventas</p>
                                         </a>
                                     </li>';
                                 } ?>
                             </ul>
-
                         </li>
 
+                        <!-- Gestión de Platos -->
                         <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
                             echo '<li class="nav-item">
                                 <a href="platos.php" class="nav-link">
@@ -128,7 +128,7 @@ if (empty($_SESSION['active'])) {
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-user-cog"></i>
                                     <p>
-                                        Ajustes
+                                        Configuración
                                         <i class="fas fa-angle-left right"></i>
                                     </p>
                                 </a>
@@ -149,8 +149,7 @@ if (empty($_SESSION['active'])) {
                             </li>';
                         } ?>
 
-
-
+                        <!-- Cerrar sesión -->
                         <li class="nav-item">
                             <a href="salir.php" class="nav-link">
                                 <i class="nav-icon fas fa-power-off"></i>
@@ -167,9 +166,8 @@ if (empty($_SESSION['active'])) {
             <!-- /.sidebar -->
         </aside>
 
-        <!-- Content Wrapper. Contains page content -->
+        <!-- Contenido Principal -->
         <div class="content-wrapper">
-
-            <!-- Main content -->
+            <!-- Contenido Principal -->
             <div class="content">
                 <div class="container-fluid py-2">

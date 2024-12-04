@@ -13,67 +13,53 @@ if (!empty($_POST)) {
     $alert = "";
     if (empty($nombre) || empty($correo) || empty($rol)) {
         $alert = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    Todo los campos son obligatorio
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    Todos los campos son obligatorios
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>';
     } else {
         if (empty($id)) {
             $pass = $_POST['pass'];
             if (empty($pass)) {
                 $alert = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    La contraseña es requerido
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>';
+                            La contraseña es requerida
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
             } else {
                 $pass = md5($_POST['pass']);
-                $query = mysqli_query($conexion, "SELECT * FROM usuarios where correo = '$correo' AND estado = 1");
+                $query = mysqli_query($conexion, "SELECT * FROM usuarios WHERE correo = '$correo' AND estado = 1");
                 $result = mysqli_fetch_array($query);
                 if ($result > 0) {
                     $alert = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    El correo ya existe
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>';
+                                El correo ya existe
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>';
                 } else {
-                    $query_insert = mysqli_query($conexion, "INSERT INTO usuarios (nombre,correo,rol,pass) values ('$nombre', '$correo', '$rol', '$pass')");
+                    $query_insert = mysqli_query($conexion, "INSERT INTO usuarios (nombre,correo,rol,pass) VALUES ('$nombre', '$correo', '$rol', '$pass')");
                     if ($query_insert) {
                         $alert = '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Usuario Registrado
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>';
+                                    Usuario registrado correctamente
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>';
                     } else {
                         $alert = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Error al registrar
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>';
+                                    Error al registrar usuario
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>';
                     }
                 }
             }
         } else {
-            $sql_update = mysqli_query($conexion, "UPDATE usuarios SET nombre = '$nombre', correo = '$correo' , rol = '$rol' WHERE idusuario = $id");
+            $sql_update = mysqli_query($conexion, "UPDATE usuarios SET nombre = '$nombre', correo = '$correo', rol = '$rol' WHERE idusuario = $id");
             if ($sql_update) {
                 $alert = '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Usuario Modificado
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>';
+                            Usuario modificado correctamente
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
             } else {
                 $alert = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Error al modificar
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>';
+                            Error al modificar usuario
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
             }
         }
     }
@@ -91,14 +77,12 @@ include "includes/header.php";
                         <input type="text" class="form-control" placeholder="Ingrese Nombre" name="nombre" id="nombre">
                         <input type="hidden" id="id" name="id">
                     </div>
-
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="correo">Correo</label>
-                        <input type="correo" class="form-control" placeholder="Ingrese correo Electrónico" name="correo" id="correo">
+                        <input type="email" class="form-control" placeholder="Ingrese correo electrónico" name="correo" id="correo">
                     </div>
-
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
@@ -110,7 +94,6 @@ include "includes/header.php";
                             <option value="3">Mozo</option>
                         </select>
                     </div>
-
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
@@ -132,7 +115,7 @@ include "includes/header.php";
                 <th>Nombre</th>
                 <th>Correo</th>
                 <th>Rol</th>
-                <th></th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -141,13 +124,8 @@ include "includes/header.php";
             $result = mysqli_num_rows($query);
             if ($result > 0) {
                 while ($data = mysqli_fetch_assoc($query)) {
-                    if ($data['rol'] == 1) {
-                        $rol = '<span class="badge badge-success">Administrador</span>';
-                    }else if($data['rol'] == 2){
-                        $rol = '<span class="badge badge-info">Cocinero</span>';
-                    }else{
-                        $rol = '<span class="badge badge-warning">Mozo</span>';
-                    }
+                    $rol = $data['rol'] == 1 ? '<span class="badge badge-success">Administrador</span>' : 
+                           ($data['rol'] == 2 ? '<span class="badge badge-info">Cocinero</span>' : '<span class="badge badge-warning">Mozo</span>');
                     ?>
                     <tr>
                         <td><?php echo $data['id']; ?></td>
@@ -157,7 +135,7 @@ include "includes/header.php";
                         <td>
                             <a href="#" onclick="editarUsuario(<?php echo $data['id']; ?>)" class="btn btn-success"><i class='fas fa-edit'></i></a>
                             <form action="eliminar.php?id=<?php echo $data['id']; ?>&accion=usuarios" method="post" class="confirmar d-inline">
-                                <button class="btn btn-danger" type="submit"><i class='fas fa-trash-alt'></i> </button>
+                                <button class="btn btn-danger" type="submit"><i class='fas fa-trash-alt'></i></button>
                             </form>
                         </td>
                     </tr>

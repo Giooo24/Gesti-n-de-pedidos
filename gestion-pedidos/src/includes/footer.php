@@ -5,16 +5,16 @@
 </div>
 <!-- Main Footer -->
 <footer class="main-footer">
-    <strong>Copyright &copy; 2023 <a href="#">Sistemas Free</a>.</strong>
-    All rights reserved.
+    <strong>Copyright &copy; 2024 <a href="#">Proyecto Software I</a>.</strong>
+    Todos los derechos reservados.
     <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 3.2.0
+        <b>B1</b>
     </div>
 </footer>
 </div>
 <!-- ./wrapper -->
 
-<!-- REQUIRED SCRIPTS -->
+<!-- SCRIPTS REQUERIDOS -->
 
 <!-- jQuery -->
 <script src="../assets/plugins/jquery/jquery.min.js"></script>
@@ -25,7 +25,7 @@
 
 <script src="../assets/plugins/chart.js/Chart.min.js"></script>
 
-<!-- OPTIONAL SCRIPTS -->
+<!-- SCRIPTS OPCIONALES -->
 <script src="../assets/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 

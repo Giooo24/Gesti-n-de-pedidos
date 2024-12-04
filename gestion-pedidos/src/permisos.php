@@ -1,29 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sistema de restaurante</title>
+    <title>Restaurante - Página no encontrada</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="../assets/dist/css/adminlte.min.css">
 </head>
+
 <body>
-    
 
 <!-- Main content -->
 <section class="content">
     <div class="error-page">
-        <h2 class="headline text-danger"> 404</h2>
+        <h2 class="headline text-danger">404</h2>
 
         <div class="error-content">
-            <h3><i class="fas fa-exclamation-triangle text-danger"></i> Oops! Page not found.</h3>
+            <h3><i class="fas fa-exclamation-triangle text-danger"></i> ¡Ups! Página no encontrada.</h3>
 
             <p>
-                No tienes permisos.
-                <a href="dashboard.php">return to dashboard</a>.
+                No tienes permisos para acceder a esta página. <br>
+                <a href="dashboard.php">Regresar al panel de control</a>.
             </p>
         </div>
         <!-- /.error-content -->

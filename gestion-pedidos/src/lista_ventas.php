@@ -7,13 +7,13 @@ if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
     include_once "includes/header.php";
 ?>
     <div class="card">
-        <div class="card-header">
-            Historial pedidos
+        <div class="card-header text-center">
+            <h4>Historial de Pedidos</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped" id="tbl">
-                    <thead>
+                <table class="table table-hover table-bordered" id="tbl">
+                    <thead class="thead-dark">
                         <tr>
                             <th>#</th>
                             <th>Sala</th>
@@ -21,13 +21,13 @@ if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
                             <th>Fecha</th>
                             <th>Total</th>
                             <th>Usuario</th>
-                            <th></th>
+                            <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php while ($row = mysqli_fetch_assoc($query)) {
                             if ($row['estado'] == 'PENDIENTE') {
-                                $estado = '<span class="badge badge-danger">Pendiente</span>';
+                                $estado = '<span class="badge badge-warning">Pendiente</span>';
                             } else {
                                 $estado = '<span class="badge badge-success">Completado</span>';
                             }
@@ -37,10 +37,10 @@ if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
                                 <td><?php echo $row['sala']; ?></td>
                                 <td><?php echo $row['num_mesa']; ?></td>
                                 <td><?php echo $row['fecha']; ?></td>
-                                <td><?php echo $row['total']; ?></td>
+                                <td>$<?php echo number_format($row['total'], 2); ?></td>
                                 <td><?php echo $row['nombre']; ?></td>
                                 <td>
-                                    <a href="#" class="btn"><?php echo $estado; ?></a>
+                                    <?php echo $estado; ?>
                                 </td>
                             </tr>
                         <?php } ?>

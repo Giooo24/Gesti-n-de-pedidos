@@ -7,7 +7,7 @@ if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 3) {
 ?>
     <div class="card">
         <div class="card-header text-center">
-            Mesas
+            Gestión de Mesas
         </div>
         <div class="card-body">
             <div class="row">
@@ -23,31 +23,29 @@ if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 3) {
                             $consulta = mysqli_query($conexion, "SELECT * FROM pedidos WHERE id_sala = $id AND num_mesa = $item AND estado = 'PENDIENTE'");
                             $resultPedido = mysqli_fetch_assoc($consulta);
                 ?>
-                            <div class="col-md-3">
+                            <div class="col-md-3 mb-4">
                                 <div class="card card-widget widget-user">
-                                    <!-- Add the bg color to the header using any of the bg-* classes -->
-                                    <div class="widget-user-header bg-<?php echo empty($resultPedido) ? 'success' : 'danger'; ?>">
-                                        <h3 class="widget-user-username">MESA</h3>
-                                        <h5 class="widget-user-desc"><?php echo $item; ?></h5>
+                                    <!-- Background color for the header -->
+                                    <div class="widget-user-header bg-<?php echo empty($resultPedido) ? 'primary' : 'warning'; ?>">
+                                        <h3 class="widget-user-username">Mesa <?php echo $item; ?></h3>
                                     </div>
                                     <div class="widget-user-image">
-                                        <img class="img-circle elevation-2" src="../assets/img/mesa.jpg" alt="User Avatar">
+                                        <img class="img-circle elevation-2" src="../assets/img/mesa.jpg" alt="Mesa Image">
                                     </div>
                                     <div class="card-footer">
                                         <div class="description-block">
                                             <?php if (empty($resultPedido)) {
-                                                echo '<a class="btn btn-outline-info" href="pedido.php?id_sala=' . $id . '&mesa=' . $item . '">Atender</a>';
+                                                echo '<a class="btn btn-info btn-block" href="pedido.php?id_sala=' . $id . '&mesa=' . $item . '">Atender Mesa</a>';
                                             } else {
-                                                echo '<a class="btn btn-outline-success" href="finalizar.php?id_sala=' . $id . '&mesa=' . $item . '">Finalizar</a>';
+                                                echo '<a class="btn btn-success btn-block" href="finalizar.php?id_sala=' . $id . '&mesa=' . $item . '">Finalizar Pedido</a>';
                                             } ?>
-
                                         </div>
-                                        <!-- /.row -->
                                     </div>
                                 </div>
                             </div>
 
-                <?php $item++;
+                <?php 
+                            $item++;
                         }
                     }
                 } ?>
@@ -57,4 +55,5 @@ if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 3) {
 <?php include_once "includes/footer.php";
 } else {
     header('Location: permisos.php');
-} ?>
+}
+?>
